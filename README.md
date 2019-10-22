@@ -1,21 +1,21 @@
-### Game Jam made by Team 14
+# Game Jam made by Team 14
 
 ## Contributors
 
-# Programmers
+### Programmers
 Luke Day, Callum Quinn, and Lachezar Penchev
 
-# Artists
+### Artists
 Lewis Reynolds, Tom Jessop, Stella Bone
 
-# Designers
+### Designers
 Billy Burton, Elliot Reed, Bradley Bath.
 
 ## Brief Overview of the Game
 
 ## How to Play
 
-# Controls
+### Controls
 The controls for the game follow the standard WASD keys for movement, or the arrow keys, and you can use the spacebar to jump.
 
-# Aim of the Game
+### Aim of the Game
