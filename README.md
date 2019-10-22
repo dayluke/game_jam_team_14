@@ -3,13 +3,13 @@
 ## Contributors
 
 ### Programmers
-Luke Day, Callum Quinn, and Lachezar Penchev
+Luke Day, Callum Quinn, and Lachezar Penchev.
 
 ### Artists
-Lewis Reynolds, Tom Jessop, Stella Bone
+Lewis Reynolds, Tom Jessop, and Stella Bone.
 
 ### Designers
-Billy Burton, Elliot Reed, Bradley Bath.
+Billy Burton, Elliot Reed, and Bradley Bath.
 
 ## Brief Overview of the Game
 
