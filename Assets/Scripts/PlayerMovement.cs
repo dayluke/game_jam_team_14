@@ -4,26 +4,57 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    /// <summary>The PlayerMovement script captures all of the inputs of the user, and interacts with the character in the game, accordingly. 
+    /// 'speed' controls how fast the player is able to move.
+    /// 'rb' is a reference to the player's rigidbody2d component.
+    /// 'dir' refers to the vector3 movement of the player.
+    /// 'playerRadius' is the radius of the player to its collider bounds.
+    /// 'playerGrounded' is a boolean variable that keeps track of whether the player is on the ground or not.
+    /// </summary>
     [SerializeField]
     private float speed = 1;
 
     private Rigidbody2D rb;
     private Vector3 dir;
+    private float playerRadius = 0;
+    private bool playerGrounded = true;
 
     private void Start()
     {
+        /// <summary>Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
+        /// <para>Assigns the 'rb' variable to the rigidbody2d of the character.
+        /// Assigns the 'playerRadius' variable to the bounds of the player's collider.</para>
+        /// </summary>
         rb = GetComponent<Rigidbody2D>();
+        playerRadius = GetComponent<Collider2D>().bounds.extents.y;
     }
 
     private void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        dir = new Vector3(x, y, 0);
+        /// <summary>Update is called every frame.
+        /// <para>Checks whether the player is pressing the "jump" key, and whether the boolean variable 'playerGrounded' is true.
+        /// If both conditions are true, then an upwards force is applied to the rigidbody.</para>
+        /// </summary>
+        if (Input.GetButtonDown("Jump") && playerGrounded)
+        {
+            rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+        }
     }
 
     private void FixedUpdate()
     {
-        rb.AddForce(dir * speed);
+        /// <summary>FixedUpdate is a physics update, that is called every fixed frame-rate frame.
+        /// <para>playerGrounded will be set to true if the rigidbody's y-axis velocity is equal to 0, otherwise it will be set to false.
+        /// A true value means that the player is on the ground, meaning that they will be able to jump again.
+        /// A false value means that the player is currently in the air.</para>
+        /// 
+        /// <para>Input.GetAxis("Horizontal") returns a value between -1 and 1 - left and right respectively.
+        /// This amount is the multiplied by a constant value, called 'speed', and the rigidbody's velocity is changed accordingly.</para>
+        /// </summary>
+        playerGrounded = rb.velocity.y == 0 ? true : false;
+        
+        float x = Input.GetAxis("Horizontal");
+        dir = new Vector3(x * speed, rb.velocity.y, 0f);
+        rb.velocity = dir;
     }
 }
