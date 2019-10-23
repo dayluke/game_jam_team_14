@@ -5,15 +5,17 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     [SerializeField]
-    private const float speed = 20f; //The speed of the projectile
+    private const float speed = 5f; //The speed of the projectile
 
     private Rigidbody2D rb;
     private const int damage = 1; //The amount of health that is removed from the enemy
+    private const int lifeTime = 3;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * speed;
+        Destroy(gameObject, lifeTime); // This destroys the bullet once it collides with something
     }
 
     private void OnTriggerEnter2D(Collider2D coll)

@@ -6,6 +6,9 @@ public class CameraFollow : MonoBehaviour
 {
     private Transform target;
 
+    [SerializeField]
+    private int yOffset = 1;
+
     private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
@@ -13,6 +16,6 @@ public class CameraFollow : MonoBehaviour
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        transform.position = new Vector3(target.position.x, target.position.y + yOffset, transform.position.z);
     }
 }

@@ -9,7 +9,7 @@ public class PlayerHealthBreatheAmmo : MonoBehaviour
     private Slider healthSlider = null, breatheSlider = null, ammoSlider = null;
     public UI_Bar health = null, breathe = null, ammo = null;
     
-    private const int maxHealth = 5, maxBreathe = 5, maxAmmo = 7;
+    private const int maxHealth = 5, maxBreathe = 5, maxAmmo = 6;
 
     private void Start()
     {
