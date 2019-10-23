@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class PlayerHealthBreatheAmmo : MonoBehaviour
 {
-    public Slider healthSlider = null, breatheSlider = null, ammoSlider = null;
+    [SerializeField]
+    private Slider healthSlider = null, breatheSlider = null, ammoSlider = null;
     public UI_Bar health = null, breathe = null, ammo = null;
     
-    private const int maxHealth = 100, maxBreathe = 100, maxAmmo = 7;
+    private const int maxHealth = 5, maxBreathe = 5, maxAmmo = 7;
 
     private void Start()
     {
@@ -32,9 +33,15 @@ public class UI_Bar
         slider.value = current;
     }
 
-    public void Deduct(int amount)
+    public void Deduct()
     {
-        current -= amount;
-        slider.value = current;
+        if (current > 0)
+        {
+            current--;
+            slider.value = current;
+        } else
+        {
+            Debug.Log("Cannot deduct anymore");
+        }
     }
 }

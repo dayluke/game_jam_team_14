@@ -17,10 +17,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float jumpSpeed = 1;
 
-    private Rigidbody2D rb;
-    private Vector3 dir;
+    private Rigidbody2D rb = null;
+    private Vector3 dir = new Vector3(0, 0, 0);
     private float playerRadius = 0;
     private bool playerGrounded = true;
+    private PlayerHealthBreatheAmmo uiScript;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         /// </summary>
         rb = GetComponent<Rigidbody2D>();
         playerRadius = GetComponent<Collider2D>().bounds.extents.y;
+        uiScript = GetComponent<PlayerHealthBreatheAmmo>();
     }
 
     private void Update()
@@ -41,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && playerGrounded)
         {
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            uiScript.breathe.Deduct();
         }
     }
 
@@ -59,10 +62,17 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         dir = new Vector3(x * speed, rb.velocity.y, 0f);
         rb.velocity = dir;
+
+        //This if statement is checking the direction in which the player is moving, if they are moving left it rotates the sprite to face left and vis versa
+        if (x > 0) //x being greater than 0 would mean it would be 1, this signifies moving right
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z); //Quaternions are used to represent rotations
+        }
+        else if (x < 0) //x being less than 0 would signify moving left
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);
+        }
     }
 
-    /* private void OnCollisionEnter2D(Collision2D coll)
-    {
-        Debug.Log(coll.gameObject.name);
-    } */
+    // private void OnCollisionEnter2D(Collision2D coll) { Debug.Log(coll.gameObject.name); }
 }
