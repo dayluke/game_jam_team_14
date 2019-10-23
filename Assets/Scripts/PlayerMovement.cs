@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     private float playerRadius = 0;
     private bool playerGrounded = true;
     private PlayerHealthBreatheAmmo uiScript;
+    private Animator anim;
 
     private void Start()
     {
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerRadius = GetComponent<Collider2D>().bounds.extents.y;
         uiScript = GetComponent<PlayerHealthBreatheAmmo>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -62,6 +64,14 @@ public class PlayerMovement : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         dir = new Vector3(x * speed, rb.velocity.y, 0f);
         rb.velocity = dir;
+
+        if (x == 0)
+        {
+            anim.SetBool("isMoving", false);
+        } else
+        {
+            anim.SetBool("isMoving", true);
+        }
 
         //This if statement is checking the direction in which the player is moving, if they are moving left it rotates the sprite to face left and vis versa
         if (x > 0) //x being greater than 0 would mean it would be 1, this signifies moving right
