@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float speed = 1;
 
+    [SerializeField]
+    private float jumpSpeed = 1;
+
     private Rigidbody2D rb;
     private Vector3 dir;
     private float playerRadius = 0;
@@ -37,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         /// </summary>
         if (Input.GetButtonDown("Jump") && playerGrounded)
         {
-            rb.AddForce(Vector2.up * speed, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
         }
     }
 
@@ -57,4 +60,9 @@ public class PlayerMovement : MonoBehaviour
         dir = new Vector3(x * speed, rb.velocity.y, 0f);
         rb.velocity = dir;
     }
+
+    /* private void OnCollisionEnter2D(Collision2D coll)
+    {
+        Debug.Log(coll.gameObject.name);
+    } */
 }
