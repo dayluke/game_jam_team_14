@@ -44,4 +44,30 @@ public class UI_Bar
             Debug.Log("Cannot deduct anymore");
         }
     }
+
+    public void Deduct(string type)
+    {
+        if (current > 0)
+        {
+            current--;
+            slider.value = current;
+        }
+        else
+        {
+            switch (type)
+            {
+                case "health":
+                    Debug.Log("You died!");
+                    break;
+                case "breathe":
+                    Debug.Log("You are out of breathe!");
+                    break;
+                case "ammo":
+                    Debug.Log("You are out of ammo!");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

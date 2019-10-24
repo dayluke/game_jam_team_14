@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     private PlayerHealthBreatheAmmo uiScript;
     private Animator anim;
 
+    public bool playerHasKey = false;
+    public bool canJump = true;
+
     private void Start()
     {
         /// <summary>Start is called on the frame when a script is enabled just before any of the Update methods are called the first time.
@@ -42,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         /// <para>Checks whether the player is pressing the "jump" key, and whether the boolean variable 'playerGrounded' is true.
         /// If both conditions are true, then an upwards force is applied to the rigidbody.</para>
         /// </summary>
-        if (Input.GetButtonDown("Jump") && playerGrounded)
+        if (Input.GetButtonDown("Jump") && playerGrounded && canJump)
         {
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             uiScript.breathe.Deduct();
@@ -84,5 +87,10 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void SlowFall()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * 0.1f, 0);
+    }
+    
     // private void OnCollisionEnter2D(Collision2D coll) { Debug.Log(coll.gameObject.name); }
 }
