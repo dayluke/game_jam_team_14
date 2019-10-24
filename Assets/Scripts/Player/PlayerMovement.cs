@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerHealthBreatheAmmo uiScript;
     private Animator anim;
 
+    private Vector3 respawnPosition = new Vector3(0, 0, 0);
     public bool playerHasKey = false;
     public bool canJump = true;
 
@@ -37,9 +38,10 @@ public class PlayerMovement : MonoBehaviour
         playerRadius = GetComponent<Collider2D>().bounds.extents.y;
         uiScript = GetComponent<PlayerHealthBreatheAmmo>();
         anim = GetComponent<Animator>();
+        Respawn();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         /// <summary>Update is called every frame.
         /// <para>Checks whether the player is pressing the "jump" key, and whether the boolean variable 'playerGrounded' is true.
@@ -48,7 +50,8 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && playerGrounded && canJump)
         {
             rb.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-            uiScript.breathe.Deduct();
+            uiScript.breathe.Deduct("breathe");
+            Debug.Log("hymp");
         }
     }
 
@@ -85,6 +88,11 @@ public class PlayerMovement : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(transform.rotation.x, 180, transform.rotation.z);
         }
+    }
+
+    public void Respawn()
+    {
+        transform.position = respawnPosition;
     }
 
     public void SlowFall()

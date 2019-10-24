@@ -8,7 +8,7 @@ public class CactusTileScript : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Player"))
         {
-            coll.gameObject.GetComponent<PlayerHealthBreatheAmmo>().health.Deduct();
+            coll.gameObject.GetComponent<PlayerHealthBreatheAmmo>().health.Deduct("health");
         }
     }
 }

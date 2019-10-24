@@ -38,7 +38,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (coll.gameObject.CompareTag("Player") && canAttack)
         {
-            player.GetComponent<PlayerHealthBreatheAmmo>().health.Deduct();
+            player.GetComponent<PlayerHealthBreatheAmmo>().health.Deduct("health");
             canAttack = false;
         }
     }
