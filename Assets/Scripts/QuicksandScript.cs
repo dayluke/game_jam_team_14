@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class QuicksandScript : MonoBehaviour
 {
-    [SerializeField]
-    private float sinkSpeed = 1f;
-
     private void OnTriggerStay2D(Collider2D coll)
     {
         if (coll.gameObject.CompareTag("Player"))

@@ -10,15 +10,19 @@ public class EnemyScript : MonoBehaviour
     private GameObject player;
     private int health = 3;
     private bool canAttack = true;
+    private float visionRadius = 3f;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, player.transform.position) < visionRadius)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+        }
     }
 
     public void DeductHealth(int damage)
